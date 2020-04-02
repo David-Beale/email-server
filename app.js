@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const sendGrid = require('@sendGrid/mail');
+// const sendGrid = require('@sendGrid/mail');
 
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -23,30 +23,30 @@ app.get('/api', (req, res) => {
   res.send('API online')
 });
 
-app.post('/api/email', (req, res) => {
-  sendGrid.setApiKey(SENDGRID_API_KEY);
-  const msg = {
-    to: 'david_beale@outlook.com',
-    from: req.body.email,
-    subject: `Website Contact from ${req.name}`,
-    text: req.body.message
-  }
-  sendGrid.send(msg)
-    .then(() => {
-      console.log('email sent')
-      res.status(200).json({
-        success: true
-      });
+// app.post('/api/email', (req, res) => {
+//   sendGrid.setApiKey(SENDGRID_API_KEY);
+//   const msg = {
+//     to: 'david_beale@outlook.com',
+//     from: req.body.email,
+//     subject: `Website Contact from ${req.name}`,
+//     text: req.body.message
+//   }
+//   sendGrid.send(msg)
+//     .then(() => {
+//       console.log('email sent')
+//       res.status(200).json({
+//         success: true
+//       });
 
-    })
-    .catch(err => {
-      console.log('error: ', err);
-      res.status(401).json({
-        success: false
-      });
+//     })
+//     .catch(err => {
+//       console.log('error: ', err);
+//       res.status(401).json({
+//         success: false
+//       });
 
-    });
-});
+//     });
+// });
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
